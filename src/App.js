@@ -4,8 +4,6 @@ import PDFViewer from './components/PDFViewer';
 import EPUBViewer from './components/EPUBViewer';
 import Header from './components/Header';
 
-const { ipcRenderer } = window.require('electron');
-
 function App() {
   const [theme, setTheme] = useState('light');
   const [currentView, setCurrentView] = useState('bookshelf');
@@ -23,7 +21,7 @@ function App() {
 
   const loadBooks = async () => {
     try {
-      const data = await ipcRenderer.invoke('load-book-data');
+      const data = await window.electronAPI.loadBookData();
       setBooks(data.books || []);
     } catch (error) {
       console.error('Error loading books:', error);
@@ -32,7 +30,7 @@ function App() {
 
   const saveBooks = async (updatedBooks) => {
     try {
-      await ipcRenderer.invoke('save-book-data', { books: updatedBooks });
+      await window.electronAPI.saveBookData({ books: updatedBooks });
       setBooks(updatedBooks);
     } catch (error) {
       console.error('Error saving books:', error);
@@ -48,7 +46,7 @@ function App() {
 
   const handleOpenBook = async () => {
     try {
-      const fileData = await ipcRenderer.invoke('open-file-dialog');
+      const fileData = await window.electronAPI.openFileDialog();
       if (fileData) {
         const newBook = {
           id: Date.now().toString(),
