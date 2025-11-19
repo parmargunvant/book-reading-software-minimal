@@ -1,0 +1,53 @@
+{
+  "name": "book-reading-software-minimal",
+  "version": "1.0.0",
+  "description": "A clean, minimal, cross-platform book reader for PDF and EPUB with Text-to-Speech, search, highlights, and dark/light mode",
+  "main": "main.js",
+  "scripts": {
+    "start": "concurrently \"npm run dev-server\" \"wait-on http://localhost:8080 && NODE_ENV=development electron .\"",
+    "dev-server": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "electron": "electron .",
+    "package": "npm run build && electron-forge package",
+    "make": "npm run build && electron-forge make"
+  },
+  "keywords": [
+    "book-reader",
+    "pdf",
+    "epub",
+    "text-to-speech",
+    "electron",
+    "cross-platform"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^39.2.2",
+    "epubjs": "^0.3.93",
+    "pdfjs-dist": "^5.4.394",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
+    "@electron-forge/cli": "^7.10.2",
+    "@electron-forge/maker-deb": "^7.10.2",
+    "@electron-forge/maker-rpm": "^7.10.2",
+    "@electron-forge/maker-squirrel": "^7.10.2",
+    "@electron-forge/maker-zip": "^7.10.2",
+    "babel-loader": "^10.0.0",
+    "concurrently": "^9.2.1",
+    "copy-webpack-plugin": "^13.0.1",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.5",
+    "style-loader": "^4.0.0",
+    "wait-on": "^9.0.3",
+    "webpack": "^5.103.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  },
+  "config": {
+    "forge": "./forge.config.js"
+  }
+}
